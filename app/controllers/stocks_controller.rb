@@ -2,9 +2,9 @@ class StocksController < ApplicationController
 
     def search
         if params[:stock].present?
-          @stock = Stock.new_lookup(params[:stock])
+          @stock = Stock.new_lookup(params[:stock].upcase)
           if @stock
-            @stock1 = current_user.stocks.where(ticker:params[:stock]).first
+            @stock1 = current_user.stocks.where(ticker:params[:stock].upcase).first
             respond_to do |format|
                 format.js { render partial: 'users/result' }
             end          
